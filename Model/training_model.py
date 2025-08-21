@@ -170,4 +170,15 @@ df_results['home_team_elo'] = home_elo_list
 df_results['away_team_elo'] = away_elo_list
 df_results['elo_diff'] = elo_diff
 
-
+##Making simple visualization(does not look good due to the dataset size)
+#
+#
+step = max(1, len(y_test)//2000)  # plot max 2000 points for readability
+plt.figure(figsize=(12,6))
+plt.scatter(range(0, len(y_test), step), y_test[::step], color='blue', label='Actual', alpha=0.3)
+plt.scatter(range(0, len(y_predicted), step), y_predicted[::step], color='red', label='Predicted', marker='x', alpha=0.3)
+plt.title('Random Forest: Actual vs Predicted Football Match Outcomes (Downsampled)')
+plt.xlabel('Match Index')
+plt.ylabel('Encoded Result')
+plt.legend()
+plt.show()
