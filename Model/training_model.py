@@ -5,6 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler, StandardScaler
 import pandas as pd
+import matplotlib.pyplot as plt
 
 le = LabelEncoder()
 
