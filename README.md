@@ -32,3 +32,8 @@ How to run:
     python main.py
     
     NOTE: IF ALL ELSE FAIL DON'T BLAME ME I DON'T KNOW WHAT IM DOING 
+
+Sources: 
+    
+    https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017/data
+    
