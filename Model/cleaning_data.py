@@ -6,7 +6,7 @@ le = LabelEncoder()
 #
 #
 #q
-df_results = pd.read_csv('./results.csv')
+df_results = pd.read_csv('Model/results.csv')
 df_results = df_results.drop(columns = ['city', 'country', 'neutral'], errors = 'ignore')
 def get_result(row):
     if row['home_score'] > row['away_score']:

@@ -103,7 +103,7 @@ def pred_match(teamA, teamB):
     print(model.predict_proba(input_scaled))
     result_label = result_encoder.inverse_transform([result_code])[0]
     return result_label
-print(pred_match('France','Germany'))
+print(pred_match('Spain','Germany'))
 
 ##Elo rating system building
 #
