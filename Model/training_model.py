@@ -6,10 +6,11 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler, StandardScaler
 import pandas as pd
 import matplotlib.pyplot as plt
+import joblib
 
 le = LabelEncoder()
 
-#spliting data(X = dataframe without answer, y = answer)
+#splitting data(X = dataframe without answer, y = answer)
 X = df_results[['home_team_encoded', 'away_team_encoded']]
 y = df_results['result_encoded']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.25, random_state= 42)
@@ -103,7 +104,7 @@ def pred_match(teamA, teamB):
     print(model.predict_proba(input_scaled))
     result_label = result_encoder.inverse_transform([result_code])[0]
     return result_label
-print(pred_match('Spain','Germany'))
+print(pred_match('Argentina','Portugal'))
 
 ##Elo rating system building
 #
@@ -183,3 +184,8 @@ plt.xlabel('Match Index')
 plt.ylabel('Encoded Result')
 plt.legend()
 plt.show()
+
+joblib.dump(best_model_RandomForest, 'models/rf_model.joblib')
+joblib.dump(scaler, 'models/rf_scaler.joblib')
+joblib.dump(result_encoder, 'model/result_encoder')
+joblib.dump(team_mapping, 'models/team_mapping.joblib')
