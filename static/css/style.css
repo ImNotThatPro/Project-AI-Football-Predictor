@@ -34,3 +34,24 @@ body{
     border-style:dotted;
     border-width: thick;
 }
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+label{
+    display: block;
+    margin-bottom: 10px;
+}
+.prediction-btn{
+    color: white;
+    background-color: blue;
+    margin-top: 10px;
+    border: none;
+    padding: 10px 20px ;
+}
+.prediction-btn:hover{
+    background-color: darkblue;
+}

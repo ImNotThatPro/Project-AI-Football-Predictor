@@ -2,21 +2,24 @@
 <html>
 <head>
     <meta charset ='UTF-8'>
-    <meta name = 'viewport' content = 'width=device-width, initial-scale=1'
+    <meta name = 'viewport' content = 'width=device-width, initial-scale=1'>    
     <title></title>
-    <link rel ='stylesheet' href = 'static/css/style.css'>
+    <link rel ='stylesheet' href = '/static/css/style.css'>
 </head>    
 <body>
     <!--TO DO LISTS: 
     CREATE A ROOT DIRECTORY THAT FOR NOW HAVE A PREDICT BUTTON, AND WHEN CLICK, REDIRECT TO PREDICT PAGES -->
-    <div class = 'predict-redirect'>
+    <div class = 'container'>
+        <div class = 'title'>Project AI Football Prediction</div>
         <button class ='predict-btn' id = 'predict-btn'>Predict</button>
+        <label>TeamA : <input type="text" id='teamA'></label>
+        <label>TeamB : <input type="text" id='teamB'></label>
+        <button onclick="getPrediction()" class="prediction-btn">Predict</button>
+        <p id = 'result' class = 'result'></p>
     </div>
-    <div class = 'title'>Project AI Football Prediction</div>
+    
 
 
-
-
-    <script src = 'static/js/script.js'></script>
+    <script src = '/static/js/script.js'></script>
 </body>    
 </html>

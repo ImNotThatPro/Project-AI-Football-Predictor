@@ -187,5 +187,5 @@ plt.show()
 
 joblib.dump(best_model_RandomForest, 'models/rf_model.joblib')
 joblib.dump(scaler, 'models/rf_scaler.joblib')
-joblib.dump(result_encoder, 'model/result_encoder')
+joblib.dump(result_encoder, 'models/result_encoder.joblib')
 joblib.dump(team_mapping, 'models/team_mapping.joblib')
