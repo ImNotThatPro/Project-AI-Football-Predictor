@@ -1,7 +1,7 @@
 body{
     font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     margin:0;
-    background: #108a5f;
+    background: grey;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,14 +9,15 @@ body{
     flex-direction: column;
 }
 .title{
-    display: flex;
-    margin-bottom: 10px;
     text-align: center;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 6px;
-    border-style:dotted;
+    margin-bottom: 60px;
+    border-style: double;
     border-width: thick;
+    border-radius: 10px;
+    margin-left: 50px;
+    margin-top: 20px;
 }
 .container{
     display: flex;
@@ -28,6 +29,7 @@ body{
 label{
     display: block;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 .prediction-btn{
     color: #4d4d4d;
@@ -46,13 +48,38 @@ label{
        box-shadow: inset 4px 4px 10px #bcbcbc,
             inset -4px -4px 10px #ffffff,
             2px 2px 10px #bcbcbc,
-            -2px -2px 10px #ffffff;
+            -2px -2px 10px #bcbcbc;
 }
 .result{
     display: flex;
-    font-size: 10px;
+    font-size: 20px;
     font-weight: bold;
-    background-color: aqua;
+    background-color: rgb(1, 120, 1);
     border: firebrick;
     padding: 10px 20px;
+}
+.teamA{
+    font-weight: bold;
+    border-radius:10px;
+    background-color: #1e0786;
+    padding: 10px;
+}
+.teamB{
+    font-weight: bold;
+    background-color: #1e0786;
+    border-radius: 10px ;
+    padding: 10px;
+}
+.topbar{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--card);
+    box-shadow: 0 2px 16px rgba(36, 41, 53, 0.13);
+    border: #1e0786;
+    background-color: #4d4d4d;
+    display: flex;
+    align-items: center;
+    min-height: 58px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }

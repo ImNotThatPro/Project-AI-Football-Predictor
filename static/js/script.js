@@ -6,6 +6,6 @@ async function getPrediction(){
     const result = await response.json();
     console.log(result)
     console.log(url)
-    document.getElementById('result').innerText = `Prediction : ${result.prediction} Accuracy ~ 52%`
+    document.getElementById('result').innerText = `Home team: ${teamA} \n Away team: ${teamB} \n Prediction: ${result.prediction} \n Accuracy ~ 52%`
 }
 
