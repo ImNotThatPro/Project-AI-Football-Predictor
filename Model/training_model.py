@@ -59,29 +59,29 @@ print('Second RandomForest model accuracy:', accuracy_RandomForest)
 #
 X_train_KNN, X_test_KNN, y_train_KNN, y_test_KNN = train_test_split(X, y, test_size= 0.25, random_state= 42)
 
-KNN_scaler = StandardScaler()
-X_train_scaled = KNN_scaler.fit_transform(X_train_KNN)
-X_test_scaled = KNN_scaler.transform(X_test_KNN)
-def KNN_tune_model(X_train_scaled, y_train_KNN):
-    param_grid_KNN = {
-        'n_neighbors': range(1,21),
-        'metric': ['euclidean', 'manhattan', 'minkowski'],
-        'weights': ['uniform', 'distance']
-    }
-    model = KNeighborsClassifier()
-    grid_search = GridSearchCV(model, param_grid_KNN, cv=5, n_jobs=-1)
-    grid_search.fit(X_train_scaled, y_train_KNN)
-    return grid_search.best_estimator_
+# KNN_scaler = StandardScaler()
+# X_train_scaled = KNN_scaler.fit_transform(X_train_KNN)
+# X_test_scaled = KNN_scaler.transform(X_test_KNN)
+# def KNN_tune_model(X_train_scaled, y_train_KNN):
+#     param_grid_KNN = {
+#         'n_neighbors': range(1,21),
+#         'metric': ['euclidean', 'manhattan', 'minkowski'],
+#         'weights': ['uniform', 'distance']
+#     }
+#     model = KNeighborsClassifier()
+#     grid_search = GridSearchCV(model, param_grid_KNN, cv=5, n_jobs=-1)
+#     grid_search.fit(X_train_scaled, y_train_KNN)
+#     return grid_search.best_estimator_
 
-best_model_KNN = KNN_tune_model(X_train_scaled, y_train_KNN)
-#Evaluate how well the KNN model performed
-def evaluate_model_KNN(model, X_test_scaled, y_test_KNN):#The same as the second model evaluate
-    prediction = model.predict(X_test_scaled)
-    accuracy = accuracy_score(y_test_KNN, prediction)
-    return accuracy
+# best_model_KNN = KNN_tune_model(X_train_scaled, y_train_KNN)
+# #Evaluate how well the KNN model performed
+# def evaluate_model_KNN(model, X_test_scaled, y_test_KNN):#The same as the second model evaluate
+#     prediction = model.predict(X_test_scaled)
+#     accuracy = accuracy_score(y_test_KNN, prediction)
+#     return accuracy
 
-accuracy_KNN = evaluate_model_KNN(best_model_KNN, X_test_scaled, y_test_KNN)
-print(f'KNN model accuracy= {accuracy_KNN*100:.2f}%')
+# accuracy_KNN = evaluate_model_KNN(best_model_KNN, X_test_scaled, y_test_KNN)
+# print(f'KNN model accuracy= {accuracy_KNN*100:.2f}%')
 
 
 ##Optional shits for show
@@ -189,3 +189,4 @@ joblib.dump(best_model_RandomForest, 'models/rf_model.joblib')
 joblib.dump(scaler, 'models/rf_scaler.joblib')
 joblib.dump(result_encoder, 'models/result_encoder.joblib')
 joblib.dump(team_mapping, 'models/team_mapping.joblib')
+joblib.dump(accuracy_RandomForest, 'models/rf_accuracy.joblib')

@@ -8,22 +8,6 @@ body{
     -webkit-font-smoothing:antialiased;
     flex-direction: column;
 }
-
-.predict-btn{
-    
-    color: white;
-    background: blue;
-    padding: 10px 20px ;
-    border: none;
-    cursor: pointer;
-    display: block;
-    box-shadow: 2px 2px 5px #557d0c;
-    border: #59b313;
-    margin-top: 10px;
-}
-.predict-btn:hover{
-    background-color: darkblue;
-}
 .title{
     display: flex;
     margin-bottom: 10px;
@@ -46,12 +30,29 @@ label{
     margin-bottom: 10px;
 }
 .prediction-btn{
-    color: white;
-    background-color: blue;
+    color: #4d4d4d;
+    background-color: #e0e0e0;
     margin-top: 10px;
-    border: none;
-    padding: 10px 20px ;
+    padding: 15px 40px;
+    cursor: pointer;
+    font-family: monospace;
+    font-weight: bold;
+    border-radius: 100px;
+    border: 2px solid rgb(206, 206, 206) ;
+    box-shadow: inset 4px 4px 10px #bcbcbc,
+        inset -4px -4px 10px #ffffff;
 }
 .prediction-btn:hover{
-    background-color: darkblue;
+       box-shadow: inset 4px 4px 10px #bcbcbc,
+            inset -4px -4px 10px #ffffff,
+            2px 2px 10px #bcbcbc,
+            -2px -2px 10px #ffffff;
+}
+.result{
+    display: flex;
+    font-size: 10px;
+    font-weight: bold;
+    background-color: aqua;
+    border: firebrick;
+    padding: 10px 20px;
 }

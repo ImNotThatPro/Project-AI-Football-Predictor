@@ -27,7 +27,7 @@ async def predict_match(teamA: str, teamB: str):
     
     input_data = [[teamA_encoded, teamB_encoded]]
     input_scaled = rf_scaler.transform(input_data)
-    result_code = rf_model.predict(input_data)[0]
+    result_code = rf_model.predict(input_scaled)[0]
     result_label = result_encoder.inverse_transform([result_code])[0]
     
     return {'prediction': result_label}
