@@ -6,6 +6,11 @@ async function getPrediction(){
     const result = await response.json();
     console.log(result)
     console.log(url)
-    document.getElementById('result').innerText = `Home team: ${teamA} \n Away team: ${teamB} \n Prediction: ${result.prediction} \n Accuracy ~ 52%`
+    document.getElementById('result').innerText = `Prediction: ${result.prediction} \n
+                                                 Home team: ${teamA} Win chance : ${(result.probs['HomeWin'] * 100).toFixed(1)} % \n
+                                                 Away team: ${teamB} Win chance : ${(result.probs['AwayWin'] * 100).toFixed(1)} % \n
+                                                 Draw chance : ${(result.probs['Draw'] * 100).toFixed(1)} % \n
+                                                 Model Accuracy ~ 52%` 
+    console.log(result.probs)
 }
 

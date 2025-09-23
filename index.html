@@ -11,8 +11,8 @@
     CREATE A ROOT DIRECTORY THAT FOR NOW HAVE A PREDICT BUTTON, AND WHEN CLICK, REDIRECT TO PREDICT PAGES -->
     <div class = 'container'>
         <div class = 'title'>Project AI Football Prediction</div>
-        <label>TeamA : <input type="text" id='teamA' class ='teamA'></label>
-        <label>TeamB : <input type="text" id='teamB' class ='teamB'></label>
+        <label>Home Team : <input type="text" id='teamA' class ='teamA'></label>
+        <label>Away Team : <input type="text" id='teamB' class ='teamB'></label>
         <button onclick="getPrediction()" class="prediction-btn">Predict</button>
         <p id = 'result' class = 'result'></p>
     </div>
@@ -21,7 +21,6 @@
         <div class="topbar-lists" role="tablist" aria-label="Choose type">
             <button class ='topbars-active' role="tab" data-type="prediction">Football Prediction</button>
             <button class ='topbars' data-type="Upcoming matches">Upcoming matches (WIP)</button>
-            <button class="topbars" data-type="WIP">WIP</button>
         </div>
     </div>  
     

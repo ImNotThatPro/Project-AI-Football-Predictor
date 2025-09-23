@@ -29,9 +29,11 @@ async def predict_match(teamA: str, teamB: str):
     input_scaled = rf_scaler.transform(input_data)
     result_code = rf_model.predict(input_scaled)[0]
     result_label = result_encoder.inverse_transform([result_code])[0]
-    
+    prediction = rf_model.predict_proba(input_scaled)[0]
+    print(result_encoder.classes_, prediction)
     return {
         teamA : 'home',
         teamB : 'away',
-        'prediction': result_label
+        'prediction': result_label,
+        'probs': dict(zip(result_encoder.classes_, prediction))
         }
