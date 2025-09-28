@@ -149,6 +149,7 @@ label{
     margin-top: 80px;
 }
 .back-btn{
+    position: fixed;
     background-color: #06b6d4;
     border-style: double;
 
