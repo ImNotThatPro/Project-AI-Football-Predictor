@@ -7,8 +7,6 @@
     <link rel ='stylesheet' href = '/static/css/style.css'>
 </head>    
 <body>
-    <!--TO DO LISTS: 
-    CREATE A ROOT DIRECTORY THAT FOR NOW HAVE A PREDICT BUTTON, AND WHEN CLICK, REDIRECT TO PREDICT PAGES -->
     <div class="main-layout">
         <div class = 'container'>
             <div class = 'title'>Project AI Football Prediction</div>
@@ -20,13 +18,29 @@
             <div id="result-block" style="display: none">
                 <button onclick="goBack()" class="back-btn">←</button>
                 <div class="result" id="result">Result will be shown here</div>
-            </div>
-            <div id="gamble-block">
-                
-            </div>
         </div>
     </div>
-    
+    <div id="betting-block" >
+        <h2>Place your bet</h2>
+        <div class="odds-box">
+            <p><strong id='homeTeamOdds'>Home Win: 2.1x</strong></p>
+            <p><strong id="drawOdss">Draw: 3.4x</strong></p>
+            <p><strong id="awayTeamOdds">Away win: 2.8x</strong></p>
+        </div>
+        <div class="bet-form">
+            <label for="betAmount">Bet amount</label>
+            <input type="number" id="betAmount" placeholder="Enter amount"/>
+
+            <label for="betChoice">Choose Outcome:</label>
+            <select id="betChoice">
+                <option value="HomeWin">HomeWin</option>
+                <option value="Draw">Draw</option>
+                <option value="AwayWin">AwayWin</option>
+            </select>
+
+            <button id ='bet-result'></button>
+        </div>
+    </div>
     <div class ='topbar'>
         <div class="topbar-logo" aria-label="Logo placeholder">FMP</div>
         <div class="topbar-lists" role="tablist" aria-label="Choose type">
