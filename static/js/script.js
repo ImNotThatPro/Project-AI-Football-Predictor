@@ -32,3 +32,43 @@ async function goBack(){
     document.getElementById('result-block').style.display ='none';
 }
 
+
+function showBetting(probabilities, teamA, teamB){
+    document.getElementById('betting-block').style.display = 'block';
+    
+    const homeOdds = (1/ probabilities.HomeWin * 0.9).toFixed(2);
+    const drawOdds = (1/ probabilities.Draw *0.9).toFixed(2);
+    const awayOdds = (1/ probabilities.AwayWin * 0.9).toFixed(2);
+
+    document.getElementById('homeTeamOdds').innerText = `HomeWin (${teamA}): ${homeOdds}x`
+    document.getElementById('drawOdds').innerText = `Draw: ${drawOdds}x`
+    document.getElementById('awayTeamOdds').innerText = `AwayWin (${teamB}): ${awayOdds}x`
+}
+let balance = 100
+function placeBet(){
+    const betAmount = parseFloat(document.getElementById('betAmount').value);
+    const choice = document.getElementById('betChoice').value;
+    document.getElementById('balance').innerText = `Balance ${balance}`
+
+    if (isNaN(betAmount) || betAmount <=0){
+        document.getElementById('bet-result').innerText = '⚠ Enter a valid bet amount.';
+        return;
+    }
+    if (betAmount > balance){
+        document.getElementById('bet-result').innerText = '⚠ Not enough balance!';
+        return;
+    }
+    balance -= betAmount
+    const won = Math.random() < 0.5; // 50% chance
+    if (won) {
+        const oddsText = document.getElementById(choice === "HomeWin" ? "homeTeamOdds" :
+                        choice === "Draw" ? "drawOdds" : "awayTeamOdds").innerText;
+        const odds = parseFloat(oddsText.split(" ")[oddsText.split(" ").length-1].replace("x",""));
+        const winnings = betAmount * odds;
+        balance += winnings;
+        document.getElementById("bet-result").innerText = `🎉 You WON! Balance: $${balance.toFixed(2)}`;
+    } else {
+        document.getElementById("bet-result").innerText = `💔 You lost. Balance: $${balance.toFixed(2)}`;
+    }
+
+}
