@@ -1,8 +1,13 @@
+const teamA = document.getElementById('teamA').value;
+const teamB = document.getElementById('teamB').value;
+const url = `http://127.0.0.1:8000/predict?teamA=${encodeURIComponent(teamA)}&teamB=${encodeURIComponent(teamB)}`;
+const response = await fetch(url)
+const result = await response.json();
+
 async function getPrediction(){
     document.getElementById('form-block').style.display ='none';
     document.getElementById('result-block').style.display ='block';
-    const teamA = document.getElementById('teamA').value;
-    const teamB = document.getElementById('teamB').value;
+    
 
     const resultBox = document.getElementById('result');
     resultBox.innerText = 'Fetching data...'
@@ -11,9 +16,7 @@ async function getPrediction(){
     await new Promise(r => setTimeout(r, 1200));
     resultBox.innerText = 'Calculating win probabilities';
 
-    const url = `http://127.0.0.1:8000/predict?teamA=${encodeURIComponent(teamA)}&teamB=${encodeURIComponent(teamB)}`;
-    const response = await fetch(url)
-    const result = await response.json();
+    
     console.log(result);
     console.log(url);
     await new Promise(r => setTimeout(r, 1000));
@@ -45,6 +48,9 @@ function showBetting(probabilities, teamA, teamB){
     document.getElementById('awayTeamOdds').innerText = `AwayWin (${teamB}): ${awayOdds}x`
 }
 let balance = 100
+const balance_text = document.getElementById('balance')
+balance_text.innerText = `Balance:${balance} `
+//Currently broken
 function placeBet(){
     const betAmount = parseFloat(document.getElementById('betAmount').value);
     const choice = document.getElementById('betChoice').value;
@@ -72,3 +78,29 @@ function placeBet(){
     }
 
 }
+//Currently broken
+document.getElementById('bet-result').addEventListener('click', () =>{
+    const betAmount = parseFloat(document.getElementById('betAmount').value);
+    const choice = document.getElementById('betChoice').value;
+    const oddsText = document.getElementById(choice === "HomeWin" ? "homeTeamOdds" :
+             choice === "Draw" ? "drawOdds" : "awayTeamOdds").innerText;
+     const odds = parseFloat(oddsText.split(" ")[oddsText.split(" ").length-1].replace("x",""));
+    if (isNaN(betAmount) || betAmount <=0){
+        document.getElementById('bet-result').innerText= '⚠ Enter a valid bet amount.';
+        return;
+    };
+    if (betAmount > balance){
+        document.getElementById('bet-result').innerText = '⚠ Not enough balance to do this bet.';
+        return;
+    };
+    if (choice === result.prediction){
+        const winnings = betAmount * odds;
+        return balance += winnings;
+    };
+    if (choice != result.prediction){
+        const winnings = betAmount * odds;
+        return balance -= winnings
+    };
+    console.log(balance)
+}
+)
