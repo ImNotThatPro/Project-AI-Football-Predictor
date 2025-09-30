@@ -94,6 +94,7 @@ label{
     align-items: center;
     min-height: 58px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
+    margin-left:auto ;
 }
 .football-prediction-btn{
     background-color: grey;
@@ -116,6 +117,9 @@ label{
     color: white;
 }
 .topbars-active{
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
     border: #06b6d4;
     background-color: #000000;
     color: white;
@@ -126,6 +130,8 @@ label{
     font-weight: 550;
 }
 .topbar-lists{
+    display: flex;
+    gap: 8px;
     background-color: #06b6d4;
     border-radius: 10px;
     border: #06b6d4;
@@ -140,6 +146,7 @@ label{
     font-weight: 550;
     max-width: 100%;
 }
+.topbar .topbar-lists{margin: 0 0 0 24px;}
 .main-layout{
     display: flex;
     justify-content: center;
