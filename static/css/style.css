@@ -135,6 +135,7 @@ label{
     background-color: #06b6d4;
     border-radius: 10px;
     border: #06b6d4;
+    cursor: pointer;
 }
 .topbars{
     border: #06b6d4;
@@ -197,4 +198,15 @@ label{
 }
 .bet-form button :hover{
     background: #048da6;
+}
+.panel{
+    display: none;
+}
+.panel.active{
+    display: block;
+}
+.topbars.active,
+.topbars-active.active{
+    background-color: #06b6d4;
+    color: black;
 }

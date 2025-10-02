@@ -104,3 +104,17 @@ document.getElementById('bet-result').addEventListener('click', () =>{
     console.log(balance)
 }
 )
+
+const tabs = document.querySelectorAll('.topbars, .topbars-active');
+const panels = document.querySelectorAll('.panel');
+
+tabs.forEach(t=>{
+    t.addEventListener('click', () =>{
+        tabs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        panels.forEach(p => p.classList.remove('active'));
+        const type = t.dataset.type;
+        const panel = document.getElementById('panel-' +type)
+        if (panel) panel.classList.add('active');
+    });
+});
