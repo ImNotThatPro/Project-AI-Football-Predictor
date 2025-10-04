@@ -114,7 +114,9 @@ label{
     justify-content: center;
     border-radius: 10px;
     font-weight: 550;
-    color: white;
+    color: black;
+    font-weight:bold ;
+    font-size: 20px;
 }
 .topbars-active{
     flex: 1;
@@ -135,7 +137,6 @@ label{
     background-color: #06b6d4;
     border-radius: 10px;
     border: #06b6d4;
-    cursor: pointer;
 }
 .topbars{
     border: #06b6d4;
@@ -146,6 +147,14 @@ label{
     border-radius: 10px;
     font-weight: 550;
     max-width: 100%;
+    cursor: pointer;
+}
+.topbars.active {
+    background-color: #06b6d4;
+    border: #000000;
+    border-color:#000000;
+    border-radius: 25px;
+    color: white;
 }
 .topbar .topbar-lists{margin: 0 0 0 24px;}
 .main-layout{
@@ -206,7 +215,7 @@ label{
     display: block;
 }
 .topbars.active,
-.topbars-active.active{
+.topbars-active.active {
     background-color: #06b6d4;
     color: black;
 }

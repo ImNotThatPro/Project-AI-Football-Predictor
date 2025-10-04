@@ -1,10 +1,8 @@
-const teamA = document.getElementById('teamA').value;
-const teamB = document.getElementById('teamB').value;
-const url = `http://127.0.0.1:8000/predict?teamA=${encodeURIComponent(teamA)}&teamB=${encodeURIComponent(teamB)}`;
-const response = await fetch(url)
-const result = await response.json();
-
 async function getPrediction(){
+    const teamA = document.getElementById('teamA').value;
+    const teamB = document.getElementById('teamB').value;
+    const url = `http://127.0.0.1:8000/predict?teamA=${encodeURIComponent(teamA)}&teamB=${encodeURIComponent(teamB)}`;
+
     document.getElementById('form-block').style.display ='none';
     document.getElementById('result-block').style.display ='block';
     
@@ -16,7 +14,8 @@ async function getPrediction(){
     await new Promise(r => setTimeout(r, 1200));
     resultBox.innerText = 'Calculating win probabilities';
 
-    
+    const response = await fetch(url)
+    const result = await response.json();
     console.log(result);
     console.log(url);
     await new Promise(r => setTimeout(r, 1000));
@@ -93,28 +92,31 @@ document.getElementById('bet-result').addEventListener('click', () =>{
         document.getElementById('bet-result').innerText = '⚠ Not enough balance to do this bet.';
         return;
     };
-    if (choice === result.prediction){
-        const winnings = betAmount * odds;
-        return balance += winnings;
-    };
-    if (choice != result.prediction){
-        const winnings = betAmount * odds;
-        return balance -= winnings
-    };
+    if (choice === result.prediction) {
+    const winnings = betAmount * odds;
+    balance += winnings;
+    document.getElementById("bet-result").innerText = `🎉 You WON! Balance: $${balance.toFixed(2)}`;
+    } else {
+        balance -= betAmount;
+        document.getElementById("bet-result").innerText = `💔 You lost. Balance: $${balance.toFixed(2)}`;
+    }
+    document.getElementById("balance").innerText = `Balance: $${balance.toFixed(2)}`;
     console.log(balance)
 }
 )
 
-const tabs = document.querySelectorAll('.topbars, .topbars-active');
-const panels = document.querySelectorAll('.panel');
+document.addEventListener('DOMContentLoaded', ()=> {
+    const tabs = document.querySelectorAll('.topbars, .topbars-active');
+    const panels = document.querySelectorAll('.panel');
 
-tabs.forEach(t=>{
-    t.addEventListener('click', () =>{
-        tabs.forEach(x => x.classList.remove('active'));
-        t.classList.add('active');
-        panels.forEach(p => p.classList.remove('active'));
-        const type = t.dataset.type;
-        const panel = document.getElementById('panel-' +type)
-        if (panel) panel.classList.add('active');
+    tabs.forEach(t=>{
+        t.addEventListener('click', () =>{
+            tabs.forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            panels.forEach(p => p.classList.remove('active'));
+            const type = t.dataset.type;
+            const panel = document.getElementById('panel-' +type)
+            if (panel) panel.classList.add('active');
+        });
     });
-});
+})
