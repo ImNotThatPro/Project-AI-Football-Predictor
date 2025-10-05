@@ -118,19 +118,6 @@ label{
     font-weight:bold ;
     font-size: 20px;
 }
-.topbars-active{
-    flex: 1;
-    text-align: center;
-    cursor: pointer;
-    border: #06b6d4;
-    background-color: #000000;
-    color: white;
-    width: 44px;
-    height: 44px;
-    padding-right: 60px;
-    border-radius: 10px;
-    font-weight: 550;
-}
 .topbar-lists{
     display: flex;
     gap: 8px;
@@ -150,10 +137,10 @@ label{
     cursor: pointer;
 }
 .topbars.active {
-    background-color: #06b6d4;
+    background-color: pink;
     border: #000000;
     border-color:#000000;
-    border-radius: 25px;
+    border-radius: 10px;
     color: white;
 }
 .topbar .topbar-lists{margin: 0 0 0 24px;}
@@ -213,9 +200,4 @@ label{
 }
 .panel.active{
     display: block;
-}
-.topbars.active,
-.topbars-active.active {
-    background-color: #06b6d4;
-    color: black;
 }

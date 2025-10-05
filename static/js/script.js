@@ -46,20 +46,22 @@ function showBetting(probabilities, teamA, teamB){
     document.getElementById('homeTeamOdds').innerText = `HomeWin (${teamA}): ${homeOdds}x`
     document.getElementById('drawOdds').innerText = `Draw: ${drawOdds}x`
     document.getElementById('awayTeamOdds').innerText = `AwayWin (${teamB}): ${awayOdds}x`
-
-    window.currentResult = result;
+    window.currentResult = result
 }
 let balance = 100
 const balance_text = document.getElementById('balance')
 balance_text.innerText = `Balance:${balance} `
 //Some how this is working
 document.getElementById('bet-result').addEventListener('click', () =>{
+    if (result === null){
+        document.getElementById('bet-result').innerText = '⚠ Please enter Home and Away team before placing an bet'
+    }
     const betAmount = parseFloat(document.getElementById('betAmount').value);
     const choice = document.getElementById('betChoice').value;
     const oddsText = document.getElementById(choice === "HomeWin" ? "homeTeamOdds" : 
              choice === "Draw" ? "drawOdds" : "awayTeamOdds").innerText;
     const odds = parseFloat(oddsText.split(" ")[oddsText.split(" ").length-1].replace("x",""));
-    console.log(result.prediction)
+    
     if (isNaN(betAmount) || betAmount <=0){
         document.getElementById('bet-result').innerText= '⚠ Enter a valid bet amount.';
         return;
@@ -96,20 +98,3 @@ document.addEventListener('DOMContentLoaded', ()=> {
         });
     });
 })
-
-function PlaceBet() {
-    document.getElementById('bet-result').onclick = function(){
-        const betAmount = parseFloat(document.getElementById('betAmount').value);
-        console.log(betAmount)
-        if (isNaN(betAmount) || betAmount <=0){
-            console.log('Please enter a valid amount')
-            return;
-        };
-        if (betAmount > balance){
-            console.log('Please enter a valid amount')
-            return;
-        };
-    }
-    
-
-}
