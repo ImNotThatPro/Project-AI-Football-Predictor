@@ -98,3 +98,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
         });
     });
 })
+
+function StoreUsername() {
+    let username = document.getElementById('username');
+
+    let store_data = () =>{
+        let input_username = localStorage.setItem('username',username.value)
+    };
+};
+
+function GetUsername() {
+    
+}

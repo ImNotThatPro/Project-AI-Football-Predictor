@@ -201,3 +201,24 @@ label{
 .panel.active{
     display: block;
 }
+.username{
+    padding: 10px;
+    background: #333;
+    color: white;
+    border-radius:8px ;
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.submit{
+    padding: 10px;
+    border-radius:10px ;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.submit :hover{
+    box-shadow: #222;
+}
