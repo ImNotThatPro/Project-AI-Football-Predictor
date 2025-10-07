@@ -211,14 +211,25 @@ label{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.submit{
-    padding: 10px;
-    border-radius:10px ;
-    background: #333;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
+.submit {
+  padding: 10px;
+  border-radius: 10px;
+  background: #333;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
-.submit :hover{
-    box-shadow: #222;
+
+.submit:hover {
+  box-shadow: 0 0 5px #222;
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.SubmitError{
+    color: red;
+    font-weight: 1px;
+    font: 1px;
 }

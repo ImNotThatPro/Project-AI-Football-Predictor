@@ -99,14 +99,23 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
 })
 
-function StoreUsername() {
-    let username = document.getElementById('username');
+const UsernameInput = document.getElementById('username');
+const SubmitButton = document.getElementById('submit');
+const SubmitError = document.getElementById('submiterror');
 
-    let store_data = () =>{
-        let input_username = localStorage.setItem('username',username.value)
-    };
-};
+UsernameInput.addEventListener('input', () => {
+  const username = UsernameInput.value.trim();
+  SubmitButton.disabled = username === '';
+  SubmitError.style.display = username === '' ? 'block' : 'none';
+});
 
-function GetUsername() {
-    
+function StoreUserInfo() {
+  const inputName = UsernameInput.value.trim();
+  if (inputName === '') {
+    SubmitError.style.display = 'block';
+    return;
+  }
+  SubmitError.style.display = 'none';
+  localStorage.setItem('username', inputName);
+  console.log(`Welcome, ${inputName}`);
 }
