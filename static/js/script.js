@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 const UsernameInput = document.getElementById('username');
 const SubmitButton = document.getElementById('submit');
 const SubmitError = document.getElementById('submiterror');
+const welcome = document.getElementById('welcome')
 
 UsernameInput.addEventListener('input', () => {
   const username = UsernameInput.value.trim();
@@ -115,7 +116,19 @@ function StoreUserInfo() {
     SubmitError.style.display = 'block';
     return;
   }
+
   SubmitError.style.display = 'none';
   localStorage.setItem('username', inputName);
   console.log(`Welcome, ${inputName}`);
-}
+
+  const StoredUsername = localStorage.getItem('username')
+  if (StoredUsername) {
+    console.log(`Welcome back ${StoredUsername}`);
+    welcome.style.display = 'block';
+    document.getElementById('welcome').innerText =(`Welcome back ${StoredUsername}`);
+  } else {
+    console.log(`Welcome new user: ${inputName}`)
+    welcome.style.display = 'block'
+    document.getElementById('welcome').innerText =(`Welcome new user: ${inputName}`)
+  }
+};

@@ -223,8 +223,8 @@ label{
 .submit:hover {
   box-shadow: 0 0 5px #222;
 }
-
-.submit:disabled {
+.submit:disabled,
+.submit[disabled] {
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -232,4 +232,8 @@ label{
     color: red;
     font-weight: 1px;
     font: 1px;
+}
+.bet-result:disabled{
+    cursor: not-allowed;
+    opacity: 0.6;
 }
