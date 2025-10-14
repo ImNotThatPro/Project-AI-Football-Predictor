@@ -2,7 +2,7 @@ let result = null
 async function getPrediction(){
     const teamA = document.getElementById('teamA').value;
     const teamB = document.getElementById('teamB').value;
-    const url = `http://127.0.0.1:8000/predict?teamA=${encodeURIComponent(teamA)}&teamB=${encodeURIComponent(teamB)}`;
+    const url = `https://project-ai-football-predictor.onrender.com/predict?teamA=${encodeURIComponent(teamA)}&teamB=${encodeURIComponent(teamB)}`;
 
     document.getElementById('form-block').style.display ='none';
     document.getElementById('result-block').style.display ='block';
