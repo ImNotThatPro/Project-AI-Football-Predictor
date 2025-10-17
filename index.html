@@ -7,20 +7,50 @@
     <link rel ='stylesheet' href = '/static/css/style.css'>
 </head>    
 <body>
-    <div class="main-layout">
-        <div class = 'container'>
-            <div class = 'title'>Project AI Football Prediction</div>
-            <div id="form-block">
-                <label>Home Team : <input type="text" id='teamA' class ='teamA'></label>
-                <label>Away Team : <input type="text" id='teamB' class ='teamB'></label>
-                <button onclick="getPrediction()" class="prediction-btn">Predict</button>
-            </div>
-            <div id="result-block" style="display: none">
-                <button onclick="goBack()" class="back-btn">←</button>
-                <div class="result" id="result">Result will be shown here</div>
-            </div>
-        </div>
+  <div class="main-layout">
+    <!-- LEFT: prediction form -->
+    <div class="container">
+      <div class="title">Project AI Football Prediction</div>
+      <div id="form-block">
+        <label>Home Team : <input type="text" id="teamA" class="teamA"></label>
+        <label>Away Team : <input type="text" id="teamB" class="teamB"></label>
+        <button onclick="getPrediction()" class="prediction-btn">Predict</button>
+      </div>
+      <div id="result-block" style="display: none">
+        <button onclick="goBack()" class="back-btn">←</button>
+        <div class="result" id="result">Result will be shown here</div>
+      </div>
     </div>
+
+    <!-- RIGHT: betting panel -->
+    <div id="panel-bet" class="panel">
+      <div id="betting-block">
+        <p class="welcome" id="welcome" style="display: none;"></p>
+        <h2>Place your bet</h2>
+        <div class="balance" id="balance">Balance:</div>
+        <label class="SubmitError" id="submiterror" style="display: none;">Please enter a username 🚫</label>
+        <input type="text" id="username" class="username" placeholder="Enter your username" />
+        <button onclick="StoreUserInfo()" class="submit" id="submit" disabled>Submit</button>
+        <div class="odds-box">
+          <p><strong id="homeTeamOdds">Home Win: 2.1x</strong></p>
+          <p><strong id="drawOds">Draw: 3.4x</strong></p>
+          <p><strong id="awayTeamOdds">Away Win: 2.8x</strong></p>
+        </div>
+        <div class="bet-form">
+          <label for="betAmount">Bet amount</label>
+          <input type="number" id="betAmount" placeholder="Enter amount" />
+
+          <label for="betChoice">Choose Outcome:</label>
+          <select id="betChoice">
+            <option value="HomeWin">HomeWin</option>
+            <option value="Draw">Draw</option>
+            <option value="AwayWin">AwayWin</option>
+          </select>
+          <button id="bet-result" class="bet-result" disabled>Place a bet first</button>
+        </div>
+      </div>
+    </div>
+  </div>
     
     <div class ='topbar'>
         <div class="topbar-logo" aria-label="Logo placeholder">FMP</div>
@@ -33,32 +63,7 @@
         
     </div>  
     <div id="panel-prediction" class="panel active"></div>
-    <div id="panel-bet" class="panel">
-        <div id="betting-block">
-        <p class="welcome" id="welcome" style="display: none;"></p>    
-        <h2>Place your bet</h2>
-        <div class="balance" id="balance">Balance:</div>
-        <label class="SubmitError" id="submiterror" style="display: none;">Please enter a username 🚫</label>
-        <input type="text" id="username" class="username" placeholder="Enter your username"/>
-        <button onclick="StoreUserInfo() " class="submit" id="submit" disabled>Submit</button>
-        <div class="odds-box">
-            <p><strong id='homeTeamOdds'>Home Win: 2.1x</strong></p>
-            <p><strong id="drawOds">Draw: 3.4x</strong></p>
-            <p><strong id="awayTeamOdds">Away win: 2.8x</strong></p>
-        </div>
-        <div class="bet-form">
-            <label for="betAmount">Bet amount</label>
-            <input type="number" id="betAmount" placeholder="Enter amount"/>
 
-            <label for="betChoice">Choose Outcome:</label>
-            <select id="betChoice">
-                <option value="HomeWin">HomeWin</option>
-                <option value="Draw">Draw</option>
-                <option value="AwayWin">AwayWin</option>
-            </select>
-            <button id ='bet-result' class="bet-result" disabled>Place an bet first</button>
-        </div>
-    </div>
     </div>
     <div id="panel-upcomingmatches" class="panel">
         <h1>This is where you can see the upcoming matches</h1>
