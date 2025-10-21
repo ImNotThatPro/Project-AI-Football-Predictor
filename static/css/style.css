@@ -256,3 +256,8 @@ label{
   text-align: center;
   border-radius: 0;      /* remove curve so it fits edge-to-edge */ 
 }
+.coffee-qr{
+    border-radius: 10px;
+    height: auto;
+    max-width: 100px;
+}
