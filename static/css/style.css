@@ -29,17 +29,48 @@ html{
     color: black;
     border-color: #06b6d4;
 }
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    background-color: rgb(1, 120, 1);
-    border-radius: 20px;
-    border: 2px solid red;
-
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 0;
+  width: auto;
+  background: #111; /* Dark base for contrast */
 }
+
+/* glowing animated border */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: -3px; /* small offset outside container */
+  border-radius: 22px;
+  background: conic-gradient(from 0deg, #ff00c8, cyan, #ff00c8);
+  animation: spin 3s linear infinite;
+  z-index: -2;
+}
+
+/* inner solid background so text stays readable */
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 3px; /* creates the visible border gap */
+  background: rgb(1, 120, 1);
+  border-radius: 18px;
+  z-index: -1;
+}
+
+/* smoother infinite rotation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 label{
     display: block;
     margin-bottom: 10px;
