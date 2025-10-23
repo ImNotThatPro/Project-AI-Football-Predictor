@@ -192,7 +192,7 @@ label{
     min-height: calc(100vh - 120px);
 }
 .back-btn{
-    position: fixed;
+    position: relative;
     background-color: #06b6d4;
     border-style: double;
 
