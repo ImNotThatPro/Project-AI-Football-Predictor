@@ -10,45 +10,6 @@ import joblib
 
 le = LabelEncoder()
 
-#splitting data(X = dataframe without answer, y = answer)
-X = df_results[['home_team_encoded', 'away_team_encoded']]
-y = df_results['result_encoded']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.25, random_state= 42)
-#Processing data for machine learning to read(i guess?)
-scaler = MinMaxScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-#Training model(old model, does not have a tuning round)
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
-
-#Evaluate how well the (first) model performed
-y_predicted = model.predict(X_test)
-print(f'First RandomForest model accuracy:{accuracy_score(y_test ,model.predict(X_test))}')
-
-##Optional shits for show
-#
-#
-#
-# Taking team name and predict
-all_team = pd.concat([df_results['home_team'], df_results['away_team']]).unique()
-team_mapping = {team : i for i, team in enumerate(sorted(all_team))}
-def pred_match(teamA, teamB):
-    teamA_encoded = team_mapping.get(teamA)
-    teamB_encoded = team_mapping.get(teamB)
-    if teamA_encoded is None or teamB_encoded is None:
-        return 'Unknown team'
-    input_data = [[teamA_encoded, teamB_encoded]]
-    input_scaled = scaler.transform(input_data)
-    result_code = model.predict(input_scaled)[0]
-    #Model confidence
-    print('Class order:', result_encoder.classes_)
-    print(model.predict_proba(input_scaled))
-    result_label = result_encoder.inverse_transform([result_code])[0]
-    return result_label
-print(pred_match('Argentina','Portugal'))
-
 ##Elo rating system building
 #
 #
@@ -115,6 +76,64 @@ df_results['home_team_elo'] = home_elo_list
 df_results['away_team_elo'] = away_elo_list
 df_results['elo_diff'] = elo_diff
 
+#splitting data(X = dataframe without answer, y = answer)
+X = df_results[['home_team_encoded', 'away_team_encoded', 'elo_diff']]
+y = df_results['result_encoded']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.25, random_state= 42)
+#Processing data for machine learning to read(i guess?)
+scaler = MinMaxScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+#Training model(old model, does not have a tuning round)
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+#Evaluate how well the (first) model performed
+y_predicted = model.predict(X_test)
+print(f'New RandomForest model accuracy:{accuracy_score(y_test ,model.predict(X_test))}')
+
+
+##Optional shits for show
+#
+#
+#
+# Taking team name and predict
+all_team = pd.concat([df_results['home_team'], df_results['away_team']]).unique()
+team_mapping = {team : i for i, team in enumerate(sorted(all_team))}
+
+def pred_match(teamA, teamB):
+    teamA_encoded = int(team_mapping.get(teamA))
+    teamB_encoded = int(team_mapping.get(teamB))
+    if teamA_encoded is None or teamB_encoded is None:
+        return 'Unknown team'
+
+    eloA = float(team_elos.get(teamA, 1500))
+    eloB = float(team_elos.get(teamB, 1500))
+    elo_diff = eloA - eloB
+
+    # Build input as a 2D list of floats
+    input_data = [[teamA_encoded, teamB_encoded, elo_diff]]
+
+    # Convert to DataFrame with column names (to silence that warning)
+    import pandas as pd
+    input_df = pd.DataFrame(input_data, columns=['home_team_encoded', 'away_team_encoded', 'elo_diff'])
+
+    input_scaled = scaler.transform(input_df)
+
+    result_code = model.predict(input_scaled)[0]
+
+    print('Class order:', result_encoder.classes_)
+    print(model.predict_proba(input_scaled))
+
+    result_label = result_encoder.inverse_transform([result_code])[0]
+    return result_label
+
+
+print(pred_match('Argentina','Portugal'))
+
+
+
 ##Making simple visualization(does not look good due to the dataset size)
 #
 #
@@ -128,8 +147,8 @@ plt.ylabel('Encoded Result')
 plt.legend()
 plt.show()
 
-joblib.dump(best_model_RandomForest, 'models/rf_model.joblib')
+joblib.dump(model, 'models/rf_model.joblib', compress=3)
 joblib.dump(scaler, 'models/rf_scaler.joblib')
 joblib.dump(result_encoder, 'models/result_encoder.joblib')
 joblib.dump(team_mapping, 'models/team_mapping.joblib')
-joblib.dump(accuracy_RandomForest, 'models/rf_accuracy.joblib')
+joblib.dump(accuracy_score(y_test ,model.predict(X_test)), 'models/rf_accuracy.joblib')
