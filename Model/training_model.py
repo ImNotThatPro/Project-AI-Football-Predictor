@@ -27,63 +27,6 @@ model.fit(X_train, y_train)
 y_predicted = model.predict(X_test)
 print(f'First RandomForest model accuracy:{accuracy_score(y_test ,model.predict(X_test))}')
 
-##Tuning the model using GridSearchCV(barely got any better than the first model)
-#
-#
-#
-def RandomForest_GridSearchCV(X_train, y_train):
-    param_grid_RandomForests = {
-        'n_estimators': [10, 50, 100,200],#numbers of trees
-        'max_depth': [10, 20],#how deep can the tree can go
-        'min_samples_split' : [2, 5],#how many split do i want the sample to get(do not forget adding the S in samples!)
-        'min_samples_leaf': [1, 2]#like branches of an trees?(also do not forget the S for god sake)
-    }
-    grid_search = GridSearchCV(RandomForestClassifier(random_state= 42),
-                               param_grid_RandomForests,
-                               cv=5,#nums of fold cross validation(watch youtube if dumb ah)
-                               scoring='accuracy',#how to display scoring
-                               n_jobs =-1,#use all cpu power to go faster?
-                               verbose=1#see the progress so far
-                               )
-    grid_search.fit(X_train,y_train)
-    best_model = grid_search.best_estimator_
-    return best_model
-
-best_model_RandomForest = RandomForest_GridSearchCV(X_train, y_train)
-accuracy_RandomForest = best_model_RandomForest.score(X_test, y_test)
-print('Second RandomForest model accuracy:', accuracy_RandomForest)
-
-##Tuning model using KNN
-#
-#
-#
-X_train_KNN, X_test_KNN, y_train_KNN, y_test_KNN = train_test_split(X, y, test_size= 0.25, random_state= 42)
-
-KNN_scaler = StandardScaler()
-X_train_scaled = KNN_scaler.fit_transform(X_train_KNN)
-X_test_scaled = KNN_scaler.transform(X_test_KNN)
-def KNN_tune_model(X_train_scaled, y_train_KNN):
-    param_grid_KNN = {
-        'n_neighbors': range(1,21),
-        'metric': ['euclidean', 'manhattan', 'minkowski'],
-        'weights': ['uniform', 'distance']
-    }
-    model = KNeighborsClassifier()
-    grid_search = GridSearchCV(model, param_grid_KNN, cv=5, n_jobs=-1)
-    grid_search.fit(X_train_scaled, y_train_KNN)
-    return grid_search.best_estimator_
-
-best_model_KNN = KNN_tune_model(X_train_scaled, y_train_KNN)
-#Evaluate how well the KNN model performed
-def evaluate_model_KNN(model, X_test_scaled, y_test_KNN):#The same as the second model evaluate
-    prediction = model.predict(X_test_scaled)
-    accuracy = accuracy_score(y_test_KNN, prediction)
-    return accuracy
-
-accuracy_KNN = evaluate_model_KNN(best_model_KNN, X_test_scaled, y_test_KNN)
-print(f'KNN model accuracy= {accuracy_KNN*100:.2f}%')
-
-
 ##Optional shits for show
 #
 #
