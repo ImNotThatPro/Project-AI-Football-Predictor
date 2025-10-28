@@ -76,6 +76,7 @@ df_results['home_team_elo'] = home_elo_list
 df_results['away_team_elo'] = away_elo_list
 df_results['elo_diff'] = elo_diff
 
+df_results.to_csv('Model/cleaned_with_elo_results.csv', index=False)
 #splitting data(X = dataframe without answer, y = answer)
 X = df_results[['home_team_encoded', 'away_team_encoded', 'elo_diff']]
 y = df_results['result_encoded']
