@@ -22,7 +22,11 @@ model = Sequential([
 
 model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy'])
 
+print(model.fit(X_train, y_train, epochs=200, batch_size=32))
+
 y_hat = model.predict(X_test)
 y_hat = [0 if val < 0.5 else 1 for val in y_hat]
+
+print(accuracy_score(y_test, y_hat))
 
 model.save('tfmodel.keras')
