@@ -68,12 +68,6 @@ print('Predicted output : \n', output)
 
 
 def draw_neural_net(ax, left, right, bottom, top, layer_sizes):
-    '''
-    Draw a neural network cartoon using matplotilb.
-    :param ax: matplotlib.axes.AxesSubplot, the axes on which to plot the cartoon
-    :param left, right, bottom, top: floats, the extents of the axes
-    :param layer_sizes: list of int, number of neurons in each layer
-    '''
     v_spacing = (top - bottom)/float(max(layer_sizes))
     h_spacing = (right - left)/float(len(layer_sizes) - 1)
     neuron_radius = v_spacing/4
