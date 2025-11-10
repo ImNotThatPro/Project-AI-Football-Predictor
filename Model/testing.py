@@ -1,32 +1,16 @@
-import pandas as pd 
-from sklearn.model_selection import train_test_split
-import tensorflow as tf
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import Dense
-from sklearn.metrics import accuracy_score
-from tensorflow.keras import Input
+from keras.datasets import mnist
+from keras.models import Sequential
+from keras.layers import Dense, Flatten
 
-df = pd.read_csv('Model/Churn.csv')
-
-X = pd.get_dummies(df.drop(['Churn', 'Customer ID'], axis=1))
-y = df['Churn'].apply(lambda X: 1 if X=='Yes' else 0)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+X_train = X_train / 255.0
+X_test = X_test / 255.0
 
 model = Sequential([
-    Input(shape=(len(X_train.columns),)),
-    Dense(32, activation='relu'),
-    Dense(64, activation='relu'),
-    Dense(1, activation='sigmoid')
+    Flatten(input_shape=(28,28)),
+    Dense(128, activation='relu'),
+    Dense(10, activation='softmax')
 ])
 
-model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy'])
-
-print(model.fit(X_train, y_train, epochs=200, batch_size=32))
-
-y_hat = model.predict(X_test)
-y_hat = [0 if val < 0.5 else 1 for val in y_hat]
-
-print(accuracy_score(y_test, y_hat))
-
-model.save('tfmodel.keras')
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=5, validation_split=0.1)
